@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wanda - Create Your Sale Ad</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Post Your Sale Ad</h1>
+        <form method="post" enctype="multipart/form-data" class="upload-form">
+            {% csrf_token %}
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image" required>
+
+            <label for="details">Details:</label>
+            <input type="text" name="details" id="details" placeholder="e.g., Grey Sofa, iPhone X, etc." required>
+
+            <button type="submit" class="submit-button">Create Ad</button>
+        </form>
+        {% if uploaded_file_url %}
+        <div class="ad-preview">
+            <img src="{{ uploaded_file_url }}" alt="Uploaded Image">
+            <p><strong>Description:</strong> {{ description }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
